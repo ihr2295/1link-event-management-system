@@ -1,0 +1,28 @@
+<!-- events/templates/event_detail.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Detail</title>
+</head>
+
+<body>
+    {% extends "base_generic.html" %}
+    {% block content %}
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date }}</p>
+    <p>Location: {{ event.location }}</p>
+    <p>Organizer: {{ event.organizer.username }}</p>
+    {% if user.is_authenticated %}
+    <form action="{% url 'book_event' event.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Book Event</button>
+    </form>
+    {% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to book this event.</p>
+    {% endif %}
+</body>
+
+</html>

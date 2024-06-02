@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'DJANGO_DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['event-management-system-3014bff26c17.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["event-management-system-3014bff26c17.herokuapp.com", "localhost"]
 
 # settings.py
 LOGIN_REDIRECT_URL = '/'
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,7 +81,7 @@ WSGI_APPLICATION = 'event_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+   'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
 # Password validation

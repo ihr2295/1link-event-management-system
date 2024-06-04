@@ -1,26 +1,11 @@
 <!-- events/templates/event_list.html -->
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Event Lists</title>
-</head>
-
-<body>
-    {% extends "base_generic.html" %}
-
-    {% block title %}Event List{% endblock %}
-    
-    {% block content %}
-    <h1>Events</h1>
-    <ul>
-        {% for event in events %}
-        <li><a href="{% url 'event_detail' event.id %}">{{ event.title }}</a></li>
-        {% endfor %}
-    </ul>
-    {% endblock %}
-    
-</body>
-
-</html>
+{% extends "base_generic.html" %}
+{% block title %}Event List{% endblock %}
+{% block content %}
+<h1>Events</h1>
+<ul class="list-group">
+    {% for event in events %}
+    <li class="list-group-item"><a href="{% url 'event_detail' event.id %}">{{ event.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

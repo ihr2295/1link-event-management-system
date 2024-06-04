@@ -81,9 +81,8 @@ WSGI_APPLICATION = 'event_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
-   'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config(default='postgres://postgres:9Whyalwaysme@507705@localhost:5432/event_management_db')
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [

@@ -1,0 +1,48 @@
+.hero-section {
+    background-image: url("../images/hero-bg.a6e9d6d59869.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.feature-box, .service-box, .blog-post {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box .icon, .service-box img, .blog-post img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.about-section img, .service-box img, .blog-post img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.cta-section {
+    background-color: #007bff;
+    color: white;
+    padding: 50px 0;
+}
+
+.cta-section .btn {
+    background-color: white;
+    color: #007bff;
+    border: 2px solid white;
+}
+
+.cta-section .btn:hover {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}

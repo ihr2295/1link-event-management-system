@@ -9,6 +9,9 @@
 
 <body>
     {% extends "base_generic.html" %}
+
+    {% block title %}Event List{% endblock %}
+    
     {% block content %}
     <h1>Events</h1>
     <ul>
@@ -17,6 +20,7 @@
         {% endfor %}
     </ul>
     {% endblock %}
+    
 </body>
 
 </html>

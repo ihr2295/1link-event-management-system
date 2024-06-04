@@ -9,6 +9,9 @@
 
 <body>
     {% extends "base_generic.html" %}
+
+    {% block title %}Event Detail{% endblock %}
+    
     {% block content %}
     <h1>{{ event.title }}</h1>
     <p>{{ event.description }}</p>
@@ -23,6 +26,8 @@
     {% else %}
     <p><a href="{% url 'login' %}">Log in</a> to book this event.</p>
     {% endif %}
+    {% endblock %}
+    
 </body>
 
 </html>

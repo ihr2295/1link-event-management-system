@@ -5,6 +5,7 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def index(request):
     events = Event.objects.all()
@@ -23,7 +24,8 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            return redirect('index')
+            messages.success(request, 'You have registered successfully. Please log in.')
+            return redirect('login')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -34,6 +36,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
+            messages.success(request, 'You have logged in successfully.')
             return redirect('user_dashboard')  # or any page you want to redirect after login
     else:
         form = AuthenticationForm()

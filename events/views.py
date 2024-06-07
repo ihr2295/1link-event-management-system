@@ -42,6 +42,11 @@ def event_detail(request, pk):
     event = Event.objects.get(pk=pk)
     return render(request, 'events/event_detail.html', {'event': event})
 
+def privacy(request):
+    return render(request, 'privacy.html')
+
+def terms(request):
+    return render(request, 'conditions.html')
 @login_required
 def create_event(request):
     if request.method == 'POST':

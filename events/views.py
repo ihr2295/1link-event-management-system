@@ -4,8 +4,9 @@ from .models import Event
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-def home(request):
-    return render(request, 'home.html')
+def index(request):
+    events = Event.objects.all()
+    return render(request, 'index.html', {'events': events})
 
 def login_view(request):
     # Implement login logic

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="1Link Event Management System User Panel Interface." />
     <meta name="author" content="1Link Event Management System User-Panel Dashboard" />
-    <title>Login - 1Link-EMS - User-panel</title>
+    <title>Register - 1Link-EMS - User-panel</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}" />
     <link href="{% static 'css/styles2.css' %}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -19,36 +19,53 @@
             <main>
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-5">
+                        <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <h3 class="text-center font-weight-light my-4">Create Account</h3>
                                 </div>
                                 <div class="card-body">
                                     <form method="post">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label class="small mb-1" for="username">Username</label>
-                                            <input class="form-control py-4" id="username" name="username" type="text" placeholder="Enter username" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="small mb-1" for="password">Password</label>
-                                            <input class="form-control py-4" id="password" name="password" type="password" placeholder="Enter password" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                                                <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="first_name">First Name</label>
+                                                    <input class="form-control py-4" id="first_name" name="first_name" type="text" placeholder="Enter first name" required />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="last_name">Last Name</label>
+                                                    <input class="form-control py-4" id="last_name" name="last_name" type="text" placeholder="Enter last name" required />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="{% url 'password_reset' %}">Forgot Password?</a>
-                                            <button class="btn btn-primary" type="submit">Login</button>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="email">Email</label>
+                                            <input class="form-control py-4" id="email" name="email" type="email" placeholder="Enter email address" required />
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="password">Password</label>
+                                                    <input class="form-control py-4" id="password" name="password" type="password" placeholder="Enter password" required />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="password2">Confirm Password</label>
+                                                    <input class="form-control py-4" id="password2" name="password2" type="password" placeholder="Confirm password" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0">
+                                            <button class="btn btn-primary btn-block" type="submit">Create Account</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="{% url 'signup' %}">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="{% url 'login' %}">Have an account? Go to login</a></div>
                                 </div>
                             </div>
                         </div>

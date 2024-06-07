@@ -34,6 +34,7 @@ C:.
 ¦   +---templates
 ¦   ¦   ¦   base_generic.html
 ¦   ¦   ¦   home.html
+¦   ¦   ¦   index.html
 ¦   ¦   ¦   login.html
 ¦   ¦   ¦   signup.html
 ¦   ¦   ¦   
@@ -85,12 +86,14 @@ C:.
 ¦   ¦           
 ¦   +---css
 ¦   ¦       styles.css
+¦   ¦       styles2.css
 ¦   ¦       
 ¦   +---images
 ¦   ¦       hero-bg.jpg
 ¦   ¦       
 ¦   +---js
 ¦           scripts.js
+¦           scripts2.js
 ¦           
 +---staticfiles
 ¦   ¦   staticfiles.json
@@ -634,12 +637,14 @@ C:.
 ¦           
 +---templates
     ¦   base_generic.html
+    ¦   conditions.html
     ¦   create_event.html
     ¦   event_detail.html
     ¦   event_list.html
     ¦   home.html
     ¦   login.html
-    ¦   signup.html
+    ¦   privacy.html
+    ¦   register.html
     ¦   
     +---users
         ¦   401.html
@@ -670,8 +675,8 @@ C:.
         ¦           favicon.png
         ¦           
         +---css
-        ¦       styles.css
+        ¦       styles2.css
         ¦       
         +---js
-                scripts.js
+                scripts2.js
                 

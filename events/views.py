@@ -3,6 +3,7 @@ from .forms import SignUpForm, EventForm
 from .models import Event
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -29,7 +30,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            return redirect('index')
+            return redirect('user_dashboard')  # or any page you want to redirect after login
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})

@@ -48,7 +48,7 @@
                             Events
                         </a>
                         <a class="nav-link" href="{% url 'create_event' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
                             Create Event
                         </a>
                     </div>
@@ -59,8 +59,7 @@
                 </div>
             </nav>
         </div>
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
+        <div id="layoutSidenav_content">
             <main>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -81,6 +80,18 @@
                     </div>
                 </div>
             </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; 1Link-EMS 2024</div>
+                        <div>
+                            <a href="{% url 'privacy' %}">Privacy Policy</a>
+                            &middot;
+                            <a href="{% url 'terms' %}">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>

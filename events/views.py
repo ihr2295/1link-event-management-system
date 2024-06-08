@@ -78,7 +78,7 @@ def create_event(request):
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'users/create_event.html', {'form': form})
+    return render(request, 'users/create_events.html', {'form': form})
 
 @login_required
 def profile(request):

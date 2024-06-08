@@ -71,10 +71,11 @@ def create_event(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Event created successfully.')
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'users/create_event.html', {'form': form})
+    return render(request, 'users/create_events.html', {'form': form})  # Check the path here
 
 @login_required
 def profile(request):

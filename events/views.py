@@ -9,7 +9,6 @@ from django.contrib import messages
 from .models import Event, Booking
 from .forms import ProfileForm
 from django.core.mail import send_mail
-from .forms import ContactForm
 from django.conf import settings
 
 def index(request):
@@ -163,15 +162,18 @@ def contact_view(request):
         message = request.POST.get('message')
 
         # Send email
-        send_mail(
-            f'Message from {name}',
-            f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}',
-            email,
-            [settings.DEFAULT_FROM_EMAIL],
-            fail_silently=False,
-        )
+        try:
+            send_mail(
+                f'Message from {name}',
+                f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}',
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],
+                fail_silently=False,
+            )
+            messages.success(request, 'Your message has been sent successfully!')
+        except Exception as e:
+            messages.error(request, 'Sorry, there was an error sending your message. Please try again later.')
 
-        messages.success(request, 'Your message has been sent successfully!')
-        return redirect('index')  # Or wherever you want to redirect after successful form submission
+        return redirect('index')
 
     return render(request, 'index.html')

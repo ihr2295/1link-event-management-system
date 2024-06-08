@@ -84,11 +84,12 @@ def profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your profile was successfully updated.')
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('profile')
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile.html', {'form': form})
+
 
 
 @login_required

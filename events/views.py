@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from .models import Event, Booking
+from .forms import ProfileForm
 
 def index(request):
     events = Event.objects.all()
@@ -79,7 +80,15 @@ def create_event(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was successfully updated.')
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'users/profile.html', {'form': form})
 
 @login_required
 def change_password(request):
@@ -89,7 +98,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('profile')
+            return redirect('user_dashboard') #redirect to dashboard when changed password
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'users/change_password.html', {'form': form})

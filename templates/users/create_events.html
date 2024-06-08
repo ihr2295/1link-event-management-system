@@ -5,18 +5,16 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="1Link Event Management System User Panel Interface." />
-    <meta name="author" content="1Link Event Management System User-Panel Dashboard" />
-    <title>Create Event - 1Link-EMS - User-panel</title>
+    <title>Create Event - 1Link-EMS</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}" />
     <link href="{% static 'css/styles2.css' %}" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="{% url 'index' %}">1Link-EMS</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,42 +59,28 @@
                 </div>
             </nav>
         </div>
-        <div id="layoutSidenav_content">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
             <main>
-                <div class="container-fluid">
-                    <h1 class="mt-4">Create Event</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Create Event</li>
-                    </ol>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-plus-circle mr-1"></i>
-                            New Event
-                        </div>
-                        <div class="card-body">
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <div class="form-group mt-4 mb-0">
-                                    <button class="btn btn-primary btn-block" type="submit">Create Event</button>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">Create Event</h3>
                                 </div>
-                            </form>
+                                <div class="card-body">
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <button type="submit" class="btn btn-primary btn-block">Create Event</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; 1Link-EMS 2024</div>
-                        <div>
-                            <a href="{% url 'privacy' %}">Privacy Policy</a>
-                            &middot;
-                            <a href="{% url 'terms' %}">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>

@@ -10,6 +10,7 @@ from .models import Event, Booking
 from .forms import ProfileForm
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.messages import get_messages
 
 def index(request):
     events = Event.objects.all()
@@ -50,6 +51,12 @@ def login_view(request):
 def logout_view(request):
     auth_logout(request)
     messages.success(request, 'You have logged out successfully.')
+
+        # Clear messages before redirecting
+    storage = get_messages(request)
+    for _ in storage:
+        pass
+
     return redirect('login')
 
 @login_required

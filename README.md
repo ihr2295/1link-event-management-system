@@ -157,6 +157,11 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 -   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 -   [Gitpod Pylint](https://pylint.org/)
 
+### Unresolved Bugs
+
+-   #### In general
+    1. In the Gitpod Development Environment the site works with full CSS styling by now when Debug is off in the settings.py file. However, the admin page (/admin) comes up without CSS styling.
+
 
 
 # Deployment

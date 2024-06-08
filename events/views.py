@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, EventForm
-from .models import Event
-from django.contrib.auth import login as auth_login, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from .models import Event, Booking
+from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
 def index(request):
@@ -42,19 +42,22 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+@login_required
 def event_list(request):
     events = Event.objects.all()
-    return render(request, 'events/event_list.html', {'events': events})
+    return render(request, 'users/events.html', {'events': events})
 
+@login_required
 def event_detail(request, pk):
-    event = Event.objects.get(pk=pk)
-    return render(request, 'events/event_detail.html', {'event': event})
+    event = get_object_or_404(Event, pk=pk)
+    return render(request, 'users/event_detail.html', {'event': event})
 
 def privacy(request):
     return render(request, 'privacy.html')
 
 def terms(request):
     return render(request, 'conditions.html')
+
 @login_required
 def create_event(request):
     if request.method == 'POST':
@@ -64,7 +67,7 @@ def create_event(request):
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'create_event.html', {'form': form})
+    return render(request, 'users/create_events.html', {'form': form})
 
 @login_required
 def profile(request):
@@ -72,12 +75,23 @@ def profile(request):
 
 @login_required
 def change_password(request):
-    return render(request, 'users/change_password.html')
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/change_password.html', {'form': form})
 
 @login_required
 def bookings(request):
-    return render(request, 'users/bookings.html')
+    user_bookings = Booking.objects.filter(user=request.user)
+    return render(request, 'users/bookings.html', {'bookings': user_bookings})
 
 @login_required
 def user_dashboard(request):
-    return render(request, 'users/index.html')
+    events = Event.objects.all()
+    return render(request, 'users/index.html', {'events': events})

@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),  # Root URL points to index view
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='terms'),
     path('events/', views.event_list, name='event_list'),

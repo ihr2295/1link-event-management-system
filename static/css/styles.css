@@ -10242,3 +10242,10 @@ form .row:first-child .floating-label-form-group {
 .login_button {
   margin-right: 5px;
 }
+.centerlized {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

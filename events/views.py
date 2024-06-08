@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SignUpForm, EventForm
+from .forms import EventForm
 from django.contrib.auth.decorators import login_required
 from .models import Event
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
@@ -71,12 +71,14 @@ def create_event(request):
     if request.method == 'POST':
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Event created successfully.')
+            event = form.save(commit=False)
+            event.organizer = request.user
+            event.save()
+            messages.success(request, 'Event created successfully!')
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'users/create_events.html', {'form': form})  # Check the path here
+    return render(request, 'users/create_event.html', {'form': form})
 
 @login_required
 def profile(request):

@@ -21,4 +21,4 @@ class EventForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['bio', 'avatar']

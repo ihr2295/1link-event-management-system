@@ -81,7 +81,7 @@ def create_event(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user.profile)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
             messages.success(request, 'Your profile was successfully updated.')
@@ -89,6 +89,7 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile.html', {'form': form})
+
 
 @login_required
 def change_password(request):

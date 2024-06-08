@@ -5,12 +5,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="1Link Event Management System User Panel Interface." />
-    <meta name="author" content="1Link Event Management System User-Panel Dashboard" />
-    <title>Dashboard - 1Link-EMS - User-panel</title>
+    <title>Delete Event - 1Link-EMS</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}" />
     <link href="{% static 'css/styles2.css' %}" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -51,7 +48,7 @@
                             Events
                         </a>
                         <a class="nav-link" href="{% url 'create_event' %}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
                             Create Event
                         </a>
                         <a class="nav-link" href="{% url 'manage_events' %}">
@@ -68,71 +65,21 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid">
-                    <h1 class="mt-4">Dashboard</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Events</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{% url 'event_list' %}">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">Delete Event</h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-success text-white mb-4">
-                                <div class="card-body">My Bookings</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{% url 'bookings' %}">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class="card-body">
+                                    <p>Are you sure you want to delete the event <strong>{{ event.title }}</strong>?</p>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                                        <a href="{% url 'manage_events' %}" class="btn btn-secondary btn-block">Cancel</a>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Bookings</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="{% url 'bookings' %}">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table mr-1"></i>
-                            Available Events
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Date</th>
-                                            <th>Location</th>
-                                            <th>Description</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for event in events %}
-                                        <tr>
-                                            <td>{{ event.title }}</td>
-                                            <td>{{ event.date }}</td>
-                                            <td>{{ event.location }}</td>
-                                            <td>{{ event.description }}</td>
-                                            <td>
-                                                <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">View</a>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>

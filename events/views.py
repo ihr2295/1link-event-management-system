@@ -91,7 +91,32 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile.html', {'form': form})
+@login_required
+def manage_events(request):
+    events = Event.objects.filter(organizer=request.user)
+    return render(request, 'users/manage_events.html', {'events': events})
 
+@login_required
+def edit_event(request, pk):
+    event = get_object_or_404(Event, pk=pk, organizer=request.user)
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event updated successfully.')
+            return redirect('manage_events')
+    else:
+        form = EventForm(instance=event)
+    return render(request, 'users/edit_event.html', {'form': form, 'event': event})
+
+@login_required
+def delete_event(request, pk):
+    event = get_object_or_404(Event, pk=pk, organizer=request.user)
+    if request.method == 'POST':
+        event.delete()
+        messages.success(request, 'Event deleted successfully.')
+        return redirect('manage_events')
+    return render(request, 'users/delete_event.html', {'event': event})
 
 
 @login_required

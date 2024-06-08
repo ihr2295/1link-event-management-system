@@ -17,5 +17,8 @@ urlpatterns = [
     path('change_password/', views.change_password, name='change_password'),
     path('bookings/', views.bookings, name='bookings'),
     path('dashboard/', views.user_dashboard, name='user_dashboard'),
-     path('book_event/<int:event_id>/', views.book_event, name='book_event'),  # New URL pattern
+    path('book_event/<int:event_id>/', views.book_event, name='book_event'),  # New URL pattern
+    path('manage_events/', views.manage_events, name='manage_events'),
+    path('manage_events/edit/<int:pk>/', views.edit_event, name='edit_event'),
+    path('manage_events/delete/<int:pk>/', views.delete_event, name='delete_event'),
 ]

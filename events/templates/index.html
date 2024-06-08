@@ -28,33 +28,40 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#events">Events</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#events">Events</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="{% url 'user_dashboard' %}">
+                            <i class="fas fa-user"></i> 
+                            Dashboard
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt"></i> 
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="{% url 'signup' %}">
+                            <i class="fas fa-user-alt"></i>
+                            Register
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
-            <br>
-            {% if user.is_authenticated %}
-            <div class="login_button">
-                <a class="btn btn-outline-light" href="{% url 'user_dashboard' %}">
-                    <i class="fas fa-user"></i> 
-                    Dashboard
-                </a>
-            </div>
-            {% else %}
-            <div class="login_button">
-                <a class="btn btn-outline-light" href="{% url 'login' %}">
-                    <i class="fas fa-sign-in-alt"></i> 
-                    Login
-                </a>
-            </div>
-            <div>
-                <a class="btn btn-outline-light" href="{% url 'signup' %}">
-                    <i class="fas fa-user-alt"></i>
-                    Register
-                </a>
-            </div>
-            {% endif %}
         </div>
     </nav>
     <!-- Masthead-->

@@ -8,6 +8,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from .models import Event, Booking
 from .forms import ProfileForm
+from django.core.mail import send_mail
+from .forms import ContactForm
+from django.conf import settings
 
 def index(request):
     events = Event.objects.all()
@@ -151,3 +154,24 @@ def book_event(request, event_id):
     else:
         messages.info(request, 'You have already booked this event.')
     return redirect('bookings')
+
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+
+        # Send email
+        send_mail(
+            f'Message from {name}',
+            f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}',
+            email,
+            [settings.DEFAULT_FROM_EMAIL],
+            fail_silently=False,
+        )
+
+        messages.success(request, 'Your message has been sent successfully!')
+        return redirect('index')  # Or wherever you want to redirect after successful form submission
+
+    return render(request, 'index.html')

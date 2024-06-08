@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>1Link - Event Management System</title>
-    <!-- Favicon-->
+    <title>Contact Us - 1Link-EMS</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}" />
-    <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
 <body id="page-top">
@@ -28,94 +24,40 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'index' %}">Home</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#events">Events</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-outline-light mx-2" href="{% url 'user_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    {% else %}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-outline-light mx-2" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-outline-light mx-2" href="{% url 'signup' %}"><i class="fas fa-user-alt"></i> Register</a></li>
-                    {% endif %}
                 </ul>
             </div>
-        </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <!-- Masthead Avatar Image-->
-            <img class="masthead-avatar mb-5" src="{% static 'assets/img/bg-hero.png' %}" alt="" />
-            <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">1 Link</h1>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">Event Management System</p>
-        </div>
-    </header>
-    <!-- Events Section-->
-    <section class="page-section events" id="events">
-        <div class="container">
-            <!-- Events Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Events</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Events Grid Items-->
-            <div class="row justify-content-center">
-                <!-- Loop through events -->
-                {% for event in events %}
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="events-item mx-auto" data-toggle="modal" data-target="#eventsModal{{ event.id }}">
-                        <div class="events-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="events-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <h2>{{ event.title }}</h2>
-                        <img class="img-fluid" src="{% static 'assets/img/events/default_event_picture.png' %}" alt="" />
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <!-- About Section-->
-    <section class="page-section bg-primary text-white mb-0" id="about">
-        <div class="container">
-            <!-- About Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- About Section Content-->
-            <div class="row">
-                <div class="col-lg-4 ml-auto"><p class="lead">EventMaster is a comprehensive platform for managing events, offering features for creating, viewing, editing, and deleting events.It supports user registration, event booking, and ticket management, </p></div>
-                <div class="col-lg-4 mr-auto"><p class="lead">making it an all-in-one solution for event organizers and attendees. With EventMaster, users can easily manage their events, streamline the booking process, and handle ticket sales efficiently.</p></div>
-            </div>
-            <!-- About Section Button-->
-            <div class="text-center mt-4">
-                <a class="btn btn-xl btn-outline-light" href="https://github.com/ihr2295/1link-event-management-system">
-                    <i class="fas fa-info mr-2"></i>
-                    More information...
+            {% if user.is_authenticated %}
+            <div class="login_button">
+                <a class="btn btn-outline-light" href="{% url 'user_dashboard' %}">
+                    <i class="fas fa-user"></i> 
+                    Dashboard
                 </a>
             </div>
+            {% else %}
+            <div class="login_button">
+                <a class="btn btn-outline-light" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in-alt"></i> 
+                    Login
+                </a>
+            </div>
+            <div>
+                <a class="btn btn-outline-light" href="{% url 'signup' %}">
+                    <i class="fas fa-user-alt"></i>
+                    Register
+                </a>
+            </div>
+            {% endif %}
         </div>
-    </section>
+    </nav>
     <!-- Contact Section-->
     <section class="page-section" id="contact">
         <div class="container">
             <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Us</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -125,32 +67,33 @@
             <!-- Contact Section Form-->
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                    <form id="contactForm" name="sentMessage" method="post" novalidate="novalidate">
+                        {% csrf_token %}
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Name</label>
-                                <input class="form-control" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." />
+                                <input class="form-control" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." name="name"/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Email Address</label>
-                                <input class="form-control" id="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
+                                <input class="form-control" id="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." name="email"/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Phone Number</label>
-                                <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number." />
+                                <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number." name="phone"/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <label>Message</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message." name="message"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -267,4 +210,3 @@
     <!-- Core theme JS-->
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
-</html>

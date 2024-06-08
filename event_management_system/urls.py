@@ -17,4 +17,5 @@ urlpatterns = [
     path('change_password/', views.change_password, name='change_password'),
     path('bookings/', views.bookings, name='bookings'),
     path('dashboard/', views.user_dashboard, name='user_dashboard'),
+     path('book_event/<int:event_id>/', views.book_event, name='book_event'),  # New URL pattern
 ]

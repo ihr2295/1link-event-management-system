@@ -74,7 +74,7 @@ def create_event(request):
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'create_event.html', {'form': form})
+    return render(request, 'users/create_event.html', {'form': form})
 
 @login_required
 def profile(request):
@@ -102,3 +102,13 @@ def bookings(request):
 def user_dashboard(request):
     events = Event.objects.all()
     return render(request, 'users/index.html', {'events': events})
+
+@login_required
+def book_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    booking, created = Booking.objects.get_or_create(user=request.user, event=event)
+    if created:
+        messages.success(request, 'You have successfully booked the event.')
+    else:
+        messages.info(request, 'You have already booked this event.')
+    return redirect('bookings')

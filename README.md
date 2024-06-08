@@ -157,10 +157,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 -   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 -   [Gitpod Pylint](https://pylint.org/)
 
-### Unresolved Bugs
-
--   #### In general
-    1. In the Gitpod Development Environment the site works with full CSS styling by now when Debug is off in the settings.py file. However, the admin page (/admin) comes up without CSS styling.
+-
 
 
 
@@ -168,37 +165,114 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
 ### Heroku
 
-The project was created in Github first and then transferred to the Gitpod development environment by the use of the green Gitpod button.
+The project was created in Github and pushed to Heroku using Git
 
 ## Initial Deployment  
 
-1. In the Gitpod environment a skeleton django project was created (project, app and relating files).
-2. A Heroku app was created in Heroku.
-3. In Heroku, under the Resources tab, in Add-ons, I searched for Postgres. When found I submitted a request to use it. 
-This attached Heroku Postgres to my project in Heroku.
-4. In the Heroku Settings tab I clicked on "Reveal Config Vars" and copied the automatically added postgres link from beside the DATABASE_URL variable. 
-5. In Gitpod dev environment, I looked for the env.py file that was automatially generated from the CI template at the beginning. This file stores environment variables.
-6. After importing the os into the env.py file, I added the database URL from Heroku into env.py.
-7. I added a secret key in the env.py file after having it generated on the [Django Secret Key Generator - MiniWebtool](https://miniwebtool.com/django-secret-key-generator/) website.
-8. I added the secret key into the Heroku Settings > config vars as well.
-9. In the settings.py file in Gitpod I imported os and added an if statement saying that outside the development environment the environment variables must be used from env.py, including the secret key.
-10. Still in the settings.py file, I commented out the present code for databases and added code to use the currently set up django database URL as set in the env.py file and also in the Heroku config vars.
-11. I migrated these changes in Gitpod using python3 manage.py migrate
-12. To get static and media sites stored on Cloudinary, I went to the dashboard of my previously created Cloudinary account and copied the API Environment Variable.
-13. I added this to the Gitpod env.py file and into the Heroku Settings > config vars. 
-14. I also added DISABLE_COLLECTATIC = 1 to the Heroku config vars. 
-15. I added cloudinary and cloudinary_storage to the installed apps in settings.py. 
-16. I set up the static file storage, static file directory, the static root, the media url, the default file storage and the templates directory in settings.py.
-17. I added the Heroku name followed by herokuapp.com to the ALLOWED_HOSTS variable name in settings.py, followed by a comma and 'localhost' (to allow running in the development environment).
-18. I created 3 directories at the top level: media, static, templates.
-19. I created a Procfile at the top level directory. 
-20. I did a git add, git commit and git push.
-21. In the Deployment tab in Heroku, in Deployment method, I added Github, set up Enable Automated Deployment, looked for my Github repository, connected my Heroku app to it and clicked on Deploy Branch at the bottom of the page.
-22. When I opened the app after the app was built and deployed, I saw the success message page with a rocket.
-23. After  my application was built, as the first step of the final deployment I turned Debug to False in the settings.py file in Gitpod.
-24. In Heroku I removed the DISABLE_COLLECTSTATIC variable.
-25. I saved my changes on all my files and performed a git add, git commit and git push.
-26. As automatic depoyment had been enabled in Heroku, I waited until my app was built, then I opened it and made sure that all functionalities work.
+1. Created a Heroku app.
+2. In Heroku, under the Resources tab, added the Heroku Postgres add-on.
+3. In the Heroku Settings tab, clicked on "Reveal Config Vars" and copied the automatically added postgres link from beside the DATABASE_URL variable.
+4. In the development environment, created an `env.py` file to store environment variables.
+5. Imported the `os` module into the `env.py` file, and added the DATABASE_URL from Heroku into `env.py`.
+6. Generated a secret key using the [Django Secret Key Generator - MiniWebtool](https://miniwebtool.com/django-secret-key-generator/) and added it to the `env.py` file.
+7. Added the secret key to the Heroku Settings > Config Vars.
+8. In `settings.py`, imported `os` and configured it to use the environment variables from `env.py` and Heroku config vars for the secret key and database.
+9. Commented out the default database configuration in `settings.py` and configured it to use the database URL set in the environment variables.
+10. Ran the migrations using `python manage.py migrate`.
+11. Set up Cloudinary for static and media files:
+    - In the Cloudinary dashboard, copied the API Environment Variable.
+    - Added this variable to `env.py` and Heroku Settings > Config Vars.
+12. Added `DISABLE_COLLECTSTATIC=1` to the Heroku config vars.
+13. Added `cloudinary` and `cloudinary_storage` to the `INSTALLED_APPS` in `settings.py`.
+14. Configured static and media files settings in `settings.py`:
+    ```python
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+    MEDIA_URL = '/media/'
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    ```
+15. Added the Heroku app name followed by `herokuapp.com` to the `ALLOWED_HOSTS` in `settings.py`, along with `localhost` for development.
+16. Created three directories at the top level: `media`, `static`, `templates`.
+17. Created a `Procfile` at the top level directory with the following content:
+    ```
+    web: gunicorn your_project_name.wsgi
+    ```
+18. Added a `runtime.txt` file to specify the Python version:
+    ```
+    python-3.9.2
+    ```
+19. Generated a `requirements.txt` file:
+    ```bash
+    pip freeze > requirements.txt
+    ```
+20. Committed all changes and pushed to the GitHub repository:
+    ```bash
+    git add .
+    git commit -m "Prepare for Heroku deployment"
+    git push origin main
+    ```
+21. In the Heroku Deployment tab, set up GitHub integration, enabled Automatic Deployments, and deployed the branch.
+22. Opened the app after deployment to ensure it was working correctly.
+23. After the initial deployment, set `DEBUG = False` in `settings.py`.
+24. Removed `DISABLE_COLLECTSTATIC` from Heroku config vars.
+25. Committed changes and pushed to GitHub to trigger automatic deployment on Heroku:
+    ```bash
+    git add .
+    git commit -m "Disable debug mode and enable collectstatic"
+    git push origin main
+    ```
+26. Waited for the deployment to complete, then opened the app to verify all functionalities.
+
+## Running the App Locally
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/1link-event-management-system.git
+    cd 1link-event-management-system
+    ```
+2. Create a virtual environment and activate it:
+    ```bash
+    python -m venv env
+    source env/bin/activate  # On Windows use `env\Scripts\activate`
+    ```
+3. Install the dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. Create an `.env` file and add the following environment variables:
+    ```env
+    SECRET_KEY=your_secret_key
+    DATABASE_URL=your_database_url
+    CLOUDINARY_URL=your_cloudinary_url
+    ```
+5. Apply migrations:
+    ```bash
+    python manage.py migrate
+    ```
+6. Create a superuser:
+    ```bash
+    python manage.py createsuperuser
+    ```
+7. Run the development server:
+    ```bash
+    python manage.py runserver
+    ```
+
+## Usage
+
+1. Register for an account or log in with an existing account.
+2. Create events from the dashboard.
+3. Book events from the event list.
+4. Manage your profile and bookings from the user panel.
+
+## Contributing
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Create a new Pull Request.
 
 # Screenshots:
 Some Snipped of my project

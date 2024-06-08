@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, EventForm
 from django.contrib.auth.decorators import login_required
-from .models import Event, Booking
+from .models import Event
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from .models import Event, Booking
 
 def index(request):
     events = Event.objects.all()
@@ -43,6 +44,12 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 @login_required
+def logout_view(request):
+    auth_logout(request)
+    messages.success(request, 'You have logged out successfully.')
+    return redirect('login')
+
+@login_required
 def event_list(request):
     events = Event.objects.all()
     return render(request, 'users/events.html', {'events': events})
@@ -67,7 +74,7 @@ def create_event(request):
             return redirect('event_list')
     else:
         form = EventForm()
-    return render(request, 'users/create_events.html', {'form': form})
+    return render(request, 'create_event.html', {'form': form})
 
 @login_required
 def profile(request):
